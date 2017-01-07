@@ -23,10 +23,10 @@ RUN pip install \
 RUN git clone https://github.com/longld/peda.git ~/peda && \
 	echo "source ~/peda/peda.py" >> ~/.gdbinit
 
+WORKDIR /ctf/work/
+
 RUN wget https://raw.githubusercontent.com/inaz2/roputils/master/roputils.py -O /ctf/
 
 COPY linux_server linux_serverx64 /ctf/
-
-WORKDIR /ctf/work/
 
 ENTRYPOINT ["/bin/bash"]
