@@ -24,7 +24,7 @@ RUN git clone https://github.com/longld/peda.git ~/peda && \
 	echo "source ~/peda/peda.py" >> ~/.gdbinit
 
 RUN mkdir -p /ctf/work && \
-	wget https://raw.githubusercontent.com/inaz2/roputils/master/roputils.py -O /ctf/
+	wget https://raw.githubusercontent.com/inaz2/roputils/master/roputils.py -O /ctf/roputils.py
 
 COPY linux_server linux_serverx64 /ctf/
 
