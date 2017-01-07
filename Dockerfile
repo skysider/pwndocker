@@ -27,6 +27,6 @@ WORKDIR /ctf
 
 RUN wget https://raw.githubusercontent.com/inaz2/roputils/master/roputils.py
 
-COPY linux_server linux_serverx64 .
+COPY linux_server linux_serverx64 ./
 
 ENTRYPOINT ["/bin/bash"]
