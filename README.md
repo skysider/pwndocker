@@ -10,3 +10,4 @@ Python Exploit Development Assistance for GDB
 - [ROPgadget](https://github.com/JonathanSalwan/ROPgadget) —— facilitate ROP exploitation tool
 - [roputils](https://github.com/inaz2/roputils) —— A Return-oriented Programming toolkit
 - linux_server[x64] —— IDA debug server for linux
+- [tmux](https://tmux.github.io/) —— a terminal multiplexer

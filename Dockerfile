@@ -10,6 +10,7 @@ RUN dpkg --add-architecture i386 && \
 	python \
 	python-pip \
 	python-capstone \
+	tmux \
 	git \
 	wget \
 	gdb --fix-missing && \
