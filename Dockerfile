@@ -22,7 +22,8 @@ RUN pip install \
 	rm -rf ~/.cache/pip/*
 
 RUN git clone https://github.com/longld/peda.git ~/peda && \
-	echo "source ~/peda/peda.py" >> ~/.gdbinit
+	git clone https://github.com/scwuaptx/Pwngdb.git ~/Pwngdb && \
+	cp ~/Pwngdb/.gdbinit ~/
 
 RUN mkdir -p /ctf/work && \
 	wget https://raw.githubusercontent.com/inaz2/roputils/master/roputils.py -O /ctf/roputils.py
