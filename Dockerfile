@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM phusion/baseimage:latest
 MAINTAINER skysider <skysider@163.com>
 
 RUN dpkg --add-architecture i386 && \

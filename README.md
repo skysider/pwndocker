@@ -1,6 +1,6 @@
 Pwndocker
 =========
-A docker environment for pwn in ctf based on ubuntu 16.04
+A docker environment for pwn in ctf based on **phusion/baseimage**, which is a modified ubuntu 16.04 baseimage for docker
 
 ### included software
 
