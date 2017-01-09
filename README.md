@@ -12,3 +12,5 @@ Python Exploit Development Assistance for GDB
 - [roputils](https://github.com/inaz2/roputils) 	—— A Return-oriented Programming toolkit
 - linux_server[x64] 	—— IDA 6.8 debug server for linux
 - [tmux](https://tmux.github.io/) 	—— a terminal multiplexer
+- [ltrace]()	—— trace library function call
+- [strace]() —— trace system call
