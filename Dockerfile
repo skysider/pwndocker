@@ -4,6 +4,8 @@ MAINTAINER skysider <skysider@163.com>
 RUN dpkg --add-architecture i386 && \
 	apt-get -y update && \
 	apt install -y \
+	libc6:i386 \
+	libc6-dev:i386 \
 	net-tools \
 	libffi-dev \
 	libssl-dev \
