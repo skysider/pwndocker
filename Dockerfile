@@ -5,7 +5,8 @@ RUN dpkg --add-architecture i386 && \
 	apt-get -y update && \
 	apt install -y \
 	libc6:i386 \
-	libc6-dev:i386 \
+	libc6-dbg:i386 \
+	libc6-dbg \
 	net-tools \
 	libffi-dev \
 	libssl-dev \
