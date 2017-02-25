@@ -2,6 +2,18 @@ Pwndocker
 =========
 A docker environment for pwn in ctf based on **phusion/baseimage**, which is a modified ubuntu 16.04 baseimage for docker
 
+### Usage
+
+	docker run -it \
+		--rm \
+		-h ${ctf_name} \
+		--name ${ctf_name} \
+		-v $(pwd)/${ctf_name}:/ctf/work \
+    	-p 23946:23946 \
+    	--cap-add=SYS_PTRACE \
+		skysider/pwndocker
+	
+	
 ### included software
 
 - [pwntools](https://github.com/Gallopsled/pwntools) 	—— CTF framework and exploit development library
