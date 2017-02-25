@@ -7,6 +7,7 @@ RUN dpkg --add-architecture i386 && \
 	libc6:i386 \
 	libc6-dbg:i386 \
 	libc6-dbg \
+	lib32stdc++6 \
 	net-tools \
 	libffi-dev \
 	libssl-dev \
