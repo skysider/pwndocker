@@ -36,6 +36,8 @@ RUN mkdir -p /ctf/work && \
 
 COPY linux_server linux_serverx64 /ctf/
 
+RUN chmod a+x linux_server linux_serverx64
+
 WORKDIR /ctf/work/
 
 ENTRYPOINT ["/bin/bash"]
