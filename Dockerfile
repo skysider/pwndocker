@@ -36,7 +36,7 @@ RUN mkdir -p /ctf/work && \
 
 COPY linux_server linux_serverx64 /ctf/
 
-RUN chmod a+x linux_server linux_serverx64
+RUN chmod a+x /ctf/linux_server /ctf/linux_serverx64
 
 WORKDIR /ctf/work/
 
