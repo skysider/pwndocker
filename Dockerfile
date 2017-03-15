@@ -8,6 +8,7 @@ RUN dpkg --add-architecture i386 && \
 	libc6-dbg:i386 \
 	libc6-dbg \
 	lib32stdc++6 \
+	g++-multilib \
 	net-tools \
 	libffi-dev \
 	libssl-dev \
@@ -24,7 +25,8 @@ RUN dpkg --add-architecture i386 && \
 
 RUN pip install \
 	ropgadget \
-	pwntools && \
+	pwntools 
+	zio && \
 	rm -rf ~/.cache/pip/*
 
 RUN git clone https://github.com/longld/peda.git ~/peda && \
