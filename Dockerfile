@@ -25,7 +25,7 @@ RUN dpkg --add-architecture i386 && \
 
 RUN pip install \
 	ropgadget \
-	pwntools 
+	pwntools \
 	zio && \
 	rm -rf ~/.cache/pip/*
 
