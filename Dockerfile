@@ -15,6 +15,7 @@ RUN dpkg --add-architecture i386 && \
 	python \
 	python-pip \
 	python-capstone \
+	ruby2.3 \
 	tmux \
 	strace \
 	ltrace \
@@ -29,6 +30,10 @@ RUN pip install \
 	zio && \
 	rm -rf ~/.cache/pip/*
 
+RUN gem install \
+	one_gadget && \
+	rm -rf /var/lib/gems/2.3.*/cache/*
+	
 RUN git clone https://github.com/longld/peda.git ~/peda && \
 	git clone https://github.com/scwuaptx/Pwngdb.git ~/Pwngdb && \
 	cp ~/Pwngdb/.gdbinit ~/
