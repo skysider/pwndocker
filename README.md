@@ -26,5 +26,5 @@ Python Exploit Development Assistance for GDB
 - [one_gadget](https://github.com/david942j/one_gadget) —— A searching one-gadget of execve('/bin/sh', NULL, NULL) tool for amd64 and i386
 - linux_server[x64] 	—— IDA 6.8 debug server for linux
 - [tmux](https://tmux.github.io/) 	—— a terminal multiplexer
-- [ltrace]()	—— trace library function call
-- [strace]() —— trace system call
+- [ltrace](https://linux.die.net/man/1/ltrace)	—— trace library function call
+- [strace](https://linux.die.net/man/1/strace) —— trace system call

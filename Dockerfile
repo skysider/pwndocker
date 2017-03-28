@@ -19,6 +19,7 @@ RUN dpkg --add-architecture i386 && \
 	tmux \
 	strace \
 	ltrace \
+	nasm \
 	git \
 	wget \
 	gdb --fix-missing && \
