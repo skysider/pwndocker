@@ -15,6 +15,7 @@ RUN dpkg --add-architecture i386 && \
 	python \
 	python-pip \
 	python-capstone \
+	ipython \
 	ruby2.3 \
 	tmux \
 	strace \
@@ -29,7 +30,7 @@ RUN pip install \
 	ropgadget \
 	pwntools \
 	zio \
-    angr && \
+    	angr && \
 	rm -rf ~/.cache/pip/*
 
 RUN gem install \
