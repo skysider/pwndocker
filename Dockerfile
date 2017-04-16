@@ -28,7 +28,8 @@ RUN dpkg --add-architecture i386 && \
 RUN pip install \
 	ropgadget \
 	pwntools \
-	zio && \
+	zio \
+    angr && \
 	rm -rf ~/.cache/pip/*
 
 RUN gem install \

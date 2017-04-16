@@ -18,6 +18,7 @@ A docker environment for pwn in ctf based on **phusion/baseimage**, which is a m
 
 - [pwntools](https://github.com/Gallopsled/pwntools) 	—— CTF framework and exploit development library
 - [zio](https://github.com/zTrix/zio)   —— An easy-to-use io library for pwn development
+- [angr](https://github.com/angr/angr)   ——  A platform-agnostic binary analysis framework
 - [gdb-peda](https://github.com/longld/peda) 	—— 
 Python Exploit Development Assistance for GDB
 - [Pwngdb](https://github.com/scwuaptx/Pwngdb) 	—— GDB for pwn
