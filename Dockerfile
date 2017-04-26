@@ -9,6 +9,7 @@ RUN dpkg --add-architecture i386 && \
     libc6-dbg \
     lib32stdc++6 \
     g++-multilib \
+    cmake \
     net-tools \
     libffi-dev \
     libssl-dev \
@@ -27,14 +28,14 @@ RUN dpkg --add-architecture i386 && \
 RUN pip3 install --no-cache-dir \
     ropper \
     unicorn \
+    keystone-engine \
     capstone
     
 RUN pip install --no-cache-dir \
     ropgadget \
     pwntools \
     zio \
-    angr \
-    ipython
+    angr
 
 RUN gem install \
     one_gadget && \
