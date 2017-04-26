@@ -14,6 +14,7 @@ RUN dpkg --add-architecture i386 && \
     libssl-dev \
     python3-pip \
     python-pip \
+    python-capstone \
     ruby2.3 \
     tmux \
     strace \
@@ -26,7 +27,6 @@ RUN dpkg --add-architecture i386 && \
 RUN pip3 install --no-cache-dir \
     ropper \
     unicorn \
-    keystone-engine \
     capstone
     
 RUN pip install --no-cache-dir \
