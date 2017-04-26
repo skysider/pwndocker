@@ -13,6 +13,7 @@ RUN dpkg --add-architecture i386 && \
     libffi-dev \
     libssl-dev \
     python3-pip \
+    python3-progressbar \
     ruby2.3 \
     tmux \
     strace \
