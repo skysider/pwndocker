@@ -9,6 +9,7 @@ RUN dpkg --add-architecture i386 && \
 	libc6-dbg \
 	lib32stdc++6 \
 	g++-multilib \
+	gdb-multiarch \
 	net-tools \
 	libffi-dev \
 	libssl-dev \
@@ -21,7 +22,6 @@ RUN dpkg --add-architecture i386 && \
 	strace \
 	ltrace \
 	nasm \
-	git \
 	wget \
 	gdb --fix-missing && \
 	rm -rf /var/lib/apt/list/*
@@ -30,16 +30,14 @@ RUN pip install \
 	ropgadget \
 	pwntools \
 	zio \
-    	angr && \
+    angr && \
 	rm -rf ~/.cache/pip/*
 
 RUN gem install \
 	one_gadget && \
 	rm -rf /var/lib/gems/2.3.*/cache/*
 	
-RUN git clone https://github.com/longld/peda.git ~/peda && \
-	git clone https://github.com/scwuaptx/Pwngdb.git ~/Pwngdb && \
-	cp ~/Pwngdb/.gdbinit ~/
+RUN wget -q -O- https://github.com/hugsy/gef/raw/master/gef.sh | sh
 
 RUN mkdir -p /ctf/work && \
 	wget https://raw.githubusercontent.com/inaz2/roputils/master/roputils.py -O /ctf/roputils.py
