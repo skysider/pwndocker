@@ -39,9 +39,6 @@ RUN gem install \
     
 RUN wget -q -O- https://github.com/hugsy/gef/raw/master/gef.sh | sh
 
-RUN mkdir -p /ctf/work && \
-    wget https://raw.githubusercontent.com/inaz2/roputils/master/roputils.py -O /ctf/roputils.py
-
 COPY linux_server linux_serverx64 /ctf/
 
 RUN chmod a+x /ctf/linux_server /ctf/linux_serverx64
