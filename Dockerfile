@@ -13,7 +13,7 @@ RUN dpkg --add-architecture i386 && \
     libffi-dev \
     libssl-dev \
     python3-pip \
-    python3-progressbar \
+    python-pip \
     ruby2.3 \
     tmux \
     strace \
@@ -24,13 +24,16 @@ RUN dpkg --add-architecture i386 && \
     rm -rf /var/lib/apt/list/*
 
 RUN pip3 install --no-cache-dir \
-    ropgadget \
     ropper \
-    pwntools \
-    angr \
     unicorn \
     keystone-engine \
-    capstone \
+    capstone
+    
+RUN pip install --no-cache-dir \
+    ropgadget \
+    pwntools \
+    zio \
+    angr \
     ipython
 
 RUN gem install \
