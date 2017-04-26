@@ -17,7 +17,6 @@ A docker environment for pwn in ctf based on **phusion/baseimage**, which is a m
 ### included software
 
 - [pwntools](https://github.com/Gallopsled/pwntools) 	—— CTF framework and exploit development library
-- [zio](https://github.com/zTrix/zio)   —— An easy-to-use io library for pwn development
 - [angr](https://github.com/angr/angr)   ——  A platform-agnostic binary analysis framework
 - [gef](https://github.com/hugsy/gef)  ——  A kick-ass set of commands for X86, ARM, MIPS, PowerPC and SPARC to make GDB cool again for exploit dev
 - [ROPgadget](https://github.com/JonathanSalwan/ROPgadget) 	—— facilitate ROP exploitation tool

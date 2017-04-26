@@ -26,7 +26,6 @@ RUN pip3 install --no-cache-dir \
     ropgadget \
     ropper \
     pwntools \
-    zio \
     angr \
     unicorn \
     keystone-engine \
