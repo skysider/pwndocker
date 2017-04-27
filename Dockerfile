@@ -22,6 +22,7 @@ RUN dpkg --add-architecture i386 && \
     ltrace \
     nasm \
     wget \
+    radare2 \
     gdb --fix-missing && \
     rm -rf /var/lib/apt/list/*
 
