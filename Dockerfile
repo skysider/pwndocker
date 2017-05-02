@@ -23,7 +23,8 @@ RUN dpkg --add-architecture i386 && \
     nasm \
     wget \
     radare2 \
-    gdb --fix-missing && \
+    gdb \
+    socat --fix-missing && \
     rm -rf /var/lib/apt/list/*
 
 RUN pip3 install --no-cache-dir \
