@@ -37,7 +37,9 @@ RUN pip install --no-cache-dir \
     ropgadget \
     pwntools \
     zio \
-    angr
+    angr && \
+    pip install --upgrade pip && \
+    pip install --upgrade pwntools
 
 RUN gem install \
     one_gadget && \
