@@ -25,7 +25,8 @@ RUN dpkg --add-architecture i386 && \
     radare2 \
     gdb \
     netcat \
-    socat --fix-missing && \
+    socat \
+    git --fix-missing && \
     rm -rf /var/lib/apt/list/*
 
 RUN pip3 install --no-cache-dir \
@@ -39,18 +40,19 @@ RUN pip install --no-cache-dir \
     pwntools \
     zio \
     angr && \
-    pip install --upgrade pip && \
     pip install --upgrade pwntools
 
 RUN gem install \
     one_gadget && \
     rm -rf /var/lib/gems/2.3.*/cache/*
     
-RUN wget -q -O- https://github.com/hugsy/gef/raw/master/gef.sh | sh
+RUN git clone https://github.com/pwndbg/pwndbg && \
+    cd pwndbg && sed -i s/sudo//g setup.sh && \
+    chmod +x setup.sh && ./setup.sh
 
-COPY linux_server linux_serverx64 /ctf/
+COPY linux_server linux_server64 /ctf/
 
-RUN chmod a+x /ctf/linux_server /ctf/linux_serverx64
+RUN chmod a+x /ctf/linux_server /ctf/linux_server64
 
 WORKDIR /ctf/work/
 
