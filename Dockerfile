@@ -26,7 +26,8 @@ RUN dpkg --add-architecture i386 && \
     gdb \
     netcat \
     socat \
-    git --fix-missing && \
+    git \
+    file --fix-missing && \
     rm -rf /var/lib/apt/list/*
 
 RUN pip3 install --no-cache-dir \
