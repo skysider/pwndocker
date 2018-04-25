@@ -35,7 +35,7 @@ RUN pip3 install --no-cache-dir \
     unicorn \
     keystone-engine \
     capstone
-    
+
 RUN pip install --no-cache-dir \
     ropgadget \
     pwntools \
@@ -46,10 +46,14 @@ RUN pip install --no-cache-dir \
 RUN gem install \
     one_gadget && \
     rm -rf /var/lib/gems/2.3.*/cache/*
-    
+
 RUN git clone https://github.com/pwndbg/pwndbg && \
     cd pwndbg && sed -i s/sudo//g setup.sh && \
     chmod +x setup.sh && ./setup.sh
+
+RUN git clone https://github.com/lieanu/libc.git && \
+    cd libc && git submodule update --init --recursive && \
+    python setup.py develop
 
 COPY linux_server linux_server64 /ctf/
 
