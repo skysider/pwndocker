@@ -27,6 +27,7 @@ RUN dpkg --add-architecture i386 && \
     netcat \
     socat \
     git \
+    patchelf \
     file --fix-missing && \
     rm -rf /var/lib/apt/list/*
 
