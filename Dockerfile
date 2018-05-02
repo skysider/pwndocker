@@ -52,7 +52,7 @@ RUN git clone https://github.com/pwndbg/pwndbg && \
     cd pwndbg && sed -i s/sudo//g setup.sh && \
     chmod +x setup.sh && ./setup.sh
 
-RUN git clone https://github.com/skysider/LibcSearcher LibcSearcher && \
+RUN git clone https://github.com/skysider/LibcSearcher.git LibcSearcher && \
     cd LibcSearcher && git submodule update --init --recursive && \
     python setup.py develop && cd libc-database && ./get
 
