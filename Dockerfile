@@ -54,7 +54,7 @@ RUN git clone https://github.com/pwndbg/pwndbg && \
 
 RUN git clone https://github.com/skysider/LibcSearcher.git LibcSearcher && \
     cd LibcSearcher && git submodule update --init --recursive && \
-    python setup.py develop && cd libc-database && ./get | ls
+    python setup.py develop && cd libc-database && ./get || ls
 
 COPY linux_server linux_server64 /ctf/
 
