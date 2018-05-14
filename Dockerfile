@@ -41,7 +41,8 @@ RUN pip install --no-cache-dir \
     ropgadget \
     pwntools \
     zio \
-    angr && \
+    angr \
+    lief && \
     pip install --upgrade pwntools
 
 RUN gem install \
