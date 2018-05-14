@@ -37,7 +37,8 @@ RUN pip3 install --no-cache-dir \
     keystone-engine \
     capstone
 
-RUN pip install --no-cache-dir \
+RUN pip install --upgrade setuptools && \
+    pip install --no-cache-dir \
     ropgadget \
     pwntools \
     zio \
