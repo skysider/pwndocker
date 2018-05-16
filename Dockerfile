@@ -43,7 +43,8 @@ RUN pip install --upgrade setuptools && \
     pwntools \
     zio \
     angr \
-    lief && \
+    lief \
+    z3-solver && \
     pip install --upgrade pwntools
 
 RUN gem install \
