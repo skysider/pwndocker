@@ -28,6 +28,7 @@ RUN dpkg --add-architecture i386 && \
     socat \
     git \
     patchelf \
+    gawk \
     file --fix-missing && \
     rm -rf /var/lib/apt/list/*
 
@@ -58,6 +59,12 @@ RUN git clone https://github.com/pwndbg/pwndbg && \
 RUN git clone https://github.com/skysider/LibcSearcher.git LibcSearcher && \
     cd LibcSearcher && git submodule update --init --recursive && \
     python setup.py develop && cd libc-database && ./get || ls
+
+RUN cd /ctf && mkdir glibc && cd glibc && mkdir 2.24 && cd /ctf/work && \
+    wget http://mirrors.ustc.edu.cn/gnu/libc/glibc-2.24.tar.gz && \
+    tar xf glibc-2.24.tar.gz && cd glibc-2.24 && mkdir build && cd build && \
+    ../configure --prefix=/ctf/glibc/2.24/ --disable-werror --enable-debug=yes && \
+    make && make install && cd ../../ && rm -rf glibc-2.24 && rm glibc-2.24.tar.gz
 
 COPY linux_server linux_server64 /ctf/
 
