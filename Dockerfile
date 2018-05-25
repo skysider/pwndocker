@@ -60,6 +60,8 @@ RUN git clone https://github.com/skysider/LibcSearcher.git LibcSearcher && \
     cd LibcSearcher && git submodule update --init --recursive && \
     python setup.py develop && cd libc-database && ./get || ls
 
+WORKDIR /ctf/work/
+
 RUN cd /ctf && mkdir glibc && cd glibc && mkdir 2.24 && cd /ctf/work && \
     wget http://mirrors.ustc.edu.cn/gnu/libc/glibc-2.24.tar.gz && \
     tar xf glibc-2.24.tar.gz && cd glibc-2.24 && mkdir build && cd build && \
@@ -70,6 +72,5 @@ COPY linux_server linux_server64 /ctf/
 
 RUN chmod a+x /ctf/linux_server /ctf/linux_server64
 
-WORKDIR /ctf/work/
 
 ENTRYPOINT ["/bin/bash"]
