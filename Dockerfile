@@ -45,7 +45,8 @@ RUN pip install --upgrade setuptools && \
     zio \
     angr \
     lief \
-    z3-solver && \
+    z3-solver \
+    apscheduler && \
     pip install --upgrade pwntools
 
 RUN gem install \
