@@ -25,6 +25,6 @@ A docker environment for pwn in ctf based on **phusion/baseimage**, which is a m
 - [radare2](https://github.com/radare/radare2) ——  A rewrite from scratch of radare in order to provide a set of libraries and tools to work with binary files
 - [LibcSearcher](https://github.com/lieanu/LibcSearcher) —— A libc search tool based on leaked function address
 - linux_server[64] 	—— IDA 7.0 debug server for linux
--  [tmux](https://tmux.github.io/) 	—— a terminal multiplexer
--  [ltrace](https://linux.die.net/man/1/ltrace)	—— trace library function call
-- [strace](https://linux.die.net/man/1/strace) —— trace system call
+- [tmux](https://tmux.github.io/) 	—— a terminal multiplexer
+- [ltrace](https://linux.die.net/man/1/ltrace)      —— trace library function call
+- [strace](https://linux.die.net/man/1/strace)     —— trace system call

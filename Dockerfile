@@ -24,6 +24,7 @@ RUN dpkg --add-architecture i386 && \
     wget \
     radare2 \
     gdb \
+    gdb-multiarch \
     netcat \
     socat \
     git \
