@@ -37,14 +37,14 @@ RUN pip3 install --no-cache-dir \
     ropper \
     unicorn \
     keystone-engine \
-    capstone
+    capstone \
+    angr
 
 RUN pip install --upgrade setuptools && \
     pip install --no-cache-dir \
     ropgadget \
     pwntools \
     zio \
-    angr \
     lief \
     z3-solver \
     apscheduler && \
