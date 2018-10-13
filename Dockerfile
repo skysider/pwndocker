@@ -59,7 +59,8 @@ RUN git clone https://github.com/pwndbg/pwndbg && \
     chmod +x setup.sh && ./setup.sh
 
 RUN git clone https://github.com/skysider/LibcSearcher.git LibcSearcher && \
-    cd LibcSearcher && git submodule update --init --recursive && \
+    cd LibcSearcher && git submodule update --init --recursive && \ 
+    cd libc-database && git pull origin master && cd .. && \
     python setup.py develop && cd libc-database && ./get || ls
 
 WORKDIR /ctf/work/
