@@ -34,6 +34,8 @@ RUN dpkg --add-architecture i386 && \
     rm -rf /var/lib/apt/list/*
 
 RUN pip3 install --no-cache-dir \
+    -i https://pypi.doubanio.com/simple/  \
+    --trusted-host pypi.doubanio.com \
     ropper \
     unicorn \
     keystone-engine \
@@ -42,13 +44,17 @@ RUN pip3 install --no-cache-dir \
 
 RUN pip install --upgrade setuptools && \
     pip install --no-cache-dir \
+    -i https://pypi.doubanio.com/simple/  \
+    --trusted-host pypi.doubanio.com \
     ropgadget \
     pwntools \
     zio \
     lief \
     z3-solver \
     apscheduler && \
-    pip install --upgrade pwntools
+    pip install -i https://pypi.doubanio.com/simple/  \
+    --trusted-host pypi.doubanio.com \
+    --upgrade pwntools
 
 RUN gem install \
     one_gadget && \
@@ -59,7 +65,7 @@ RUN git clone https://github.com/pwndbg/pwndbg && \
     chmod +x setup.sh && ./setup.sh
 
 RUN git clone https://github.com/skysider/LibcSearcher.git LibcSearcher && \
-    cd LibcSearcher && git submodule update --init --recursive && \ 
+    cd LibcSearcher && git submodule update --init --recursive && \
     cd libc-database && git pull origin master && cd .. && \
     python setup.py develop && cd libc-database && ./get || ls
 
