@@ -13,9 +13,8 @@ RUN dpkg --add-architecture i386 && \
     net-tools \
     libffi-dev \
     libssl-dev \
-    python3-pip \
-    python-pip \
-    python-capstone \
+    python-dev \
+    build-essential \
     ruby2.3 \
     tmux \
     strace \
@@ -30,8 +29,14 @@ RUN dpkg --add-architecture i386 && \
     git \
     patchelf \
     gawk \
-    file --fix-missing && \
+    file \
+    bison --fix-missing && \
     rm -rf /var/lib/apt/list/*
+
+RUN wget https://bootstrap.pypa.io/get-pip.py && \
+    python3 get-pip.py && \
+    python get-pip.py && \
+    rm get-pip.py
 
 RUN pip3 install --no-cache-dir \
     -i https://pypi.doubanio.com/simple/  \
@@ -50,6 +55,7 @@ RUN pip install --upgrade setuptools && \
     pwntools \
     zio \
     lief \
+    smmap2 \
     z3-solver \
     apscheduler && \
     pip install -i https://pypi.doubanio.com/simple/  \
@@ -61,8 +67,7 @@ RUN gem install \
     rm -rf /var/lib/gems/2.3.*/cache/*
 
 RUN git clone https://github.com/pwndbg/pwndbg && \
-    cd pwndbg && sed -i s/sudo//g setup.sh && \
-    chmod +x setup.sh && ./setup.sh
+    cd pwndbg && chmod +x setup.sh && ./setup.sh
 
 RUN git clone https://github.com/skysider/LibcSearcher.git LibcSearcher && \
     cd LibcSearcher && git submodule update --init --recursive && \
@@ -71,15 +76,9 @@ RUN git clone https://github.com/skysider/LibcSearcher.git LibcSearcher && \
 
 WORKDIR /ctf/work/
 
-RUN cd /ctf && mkdir glibc && cd glibc && mkdir 2.24 && cd /ctf/work && \
-    wget http://mirrors.ustc.edu.cn/gnu/libc/glibc-2.24.tar.gz && \
-    tar xf glibc-2.24.tar.gz && cd glibc-2.24 && mkdir build && cd build && \
-    ../configure --prefix=/ctf/glibc/2.24/ --disable-werror --enable-debug=yes && \
-    make && make install && cd ../../ && rm -rf glibc-2.24 && rm glibc-2.24.tar.gz
+COPY linux_server linux_server64 build_glibc.sh /ctf/
 
-COPY linux_server linux_server64 /ctf/
-
-RUN chmod a+x /ctf/linux_server /ctf/linux_server64
-
+RUN chmod a+x /ctf/linux_server /ctf/linux_server64 /ctf/build_glibc.sh && \
+    /ctf/build_glibc.sh 2.24 && /ctf/build_glibc.sh 2.27
 
 ENTRYPOINT ["/bin/bash"]

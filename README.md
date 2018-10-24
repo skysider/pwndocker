@@ -28,3 +28,22 @@ A docker environment for pwn in ctf based on **phusion/baseimage**, which is a m
 - [tmux](https://tmux.github.io/) 	—— a terminal multiplexer
 - [ltrace](https://linux.die.net/man/1/ltrace)      —— trace library function call
 - [strace](https://linux.die.net/man/1/strace)     —— trace system call
+
+### included glibc
+
+Default compiled glibc path is `/glibc`.
+
+- 2.23  —— pwndocker default libc version
+- 2.24  —— introduce vtable check in file struct
+- 2.27  —— intruduce tcache in heap (since 2.26)
+
+#### How to run in custom libc version?
+
+```shell
+patchelf --set-interpreter /glibc/2.27/lib/ld-2.27.so ./test
+LD_PRELOAD=/glibc/2.27/lib/libc.so.6 ./test
+```
+
+
+
+ 
