@@ -1,5 +1,7 @@
-FROM ubuntu:bionic
+FROM ubuntu:18.04
 MAINTAINER skysider <skysider@163.com>
+
+ENV LANG C.UTF-8
 
 RUN dpkg --add-architecture i386 && \
     apt-get -y update && \
@@ -10,13 +12,16 @@ RUN dpkg --add-architecture i386 && \
     lib32stdc++6 \
     g++-multilib \
     cmake \
+    python \
+    python-pip \
+    python3 \
+    python3-pip \
     net-tools \
     libffi-dev \
     libssl-dev \
-    python3-pip \
-    python-pip \
-    python-capstone \
-    ruby2.3 \
+    python-dev \
+    build-essential \
+    ruby \
     tmux \
     strace \
     ltrace \
@@ -24,34 +29,61 @@ RUN dpkg --add-architecture i386 && \
     wget \
     radare2 \
     gdb \
+    gdb-multiarch \
     netcat \
-    socat --fix-missing && \
+    socat \
+    git \
+    patchelf \
+    gawk \
+    file \
+    sshpass \
+    bison --fix-missing && \
     rm -rf /var/lib/apt/list/*
 
-RUN pip3 install --no-cache-dir \
+RUN python3 -m pip install -U pip && \
+    python3 -m pip install --no-cache-dir \
+    -i https://pypi.doubanio.com/simple/  \
+    --trusted-host pypi.doubanio.com \
     ropper \
     unicorn \
     keystone-engine \
-    capstone
-    
-RUN pip install --no-cache-dir \
+    capstone \
+    angr
+
+RUN python -m pip install -U pip setuptools && \
+    python -m pip install --no-cache-dir \
+    -i https://pypi.doubanio.com/simple/  \
+    --trusted-host pypi.doubanio.com \
     ropgadget \
     pwntools \
     zio \
-    angr && \
-    pip install --upgrade pip && \
-    pip install --upgrade pwntools
+    lief \
+    smmap2 \
+    z3-solver \
+    apscheduler && \
+    python -m pip install -i https://pypi.doubanio.com/simple/  \
+    --trusted-host pypi.doubanio.com \
+    --upgrade pwntools
 
 RUN gem install \
     one_gadget && \
-    rm -rf /var/lib/gems/2.3.*/cache/*
-    
-RUN wget -q -O- https://github.com/hugsy/gef/raw/master/gef.sh | sh
+    rm -rf /var/lib/gems/2.*/cache/*
 
-COPY linux_server linux_serverx64 /ctf/
+RUN git clone https://github.com/pwndbg/pwndbg && \
+    cd pwndbg && chmod +x setup.sh && ./setup.sh
 
-RUN chmod a+x /ctf/linux_server /ctf/linux_serverx64
+RUN git clone https://github.com/skysider/LibcSearcher.git  LibcSearcher && \
+    cd LibcSearcher && git submodule update --init --recursive && \
+    cd libc-database && git pull origin master && cd .. && \
+    python setup.py develop && cd libc-database && ./get || ls
 
 WORKDIR /ctf/work/
+
+COPY linux_server linux_server64 build_glibc.sh /ctf/
+
+RUN chmod a+x /ctf/linux_server /ctf/linux_server64 /ctf/build_glibc.sh && \
+    /ctf/build_glibc.sh 2.23 & \
+    /ctf/build_glibc.sh 2.24 & \
+    /ctf/build_glibc.sh 2.26
 
 ENTRYPOINT ["/bin/bash"]
