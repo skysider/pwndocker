@@ -83,8 +83,12 @@ WORKDIR /ctf/work/
 COPY linux_server linux_server64 build_glibc.sh /ctf/
 
 RUN chmod a+x /ctf/linux_server /ctf/linux_server64 /ctf/build_glibc.sh && \
+    /ctf/build_glibc.sh 2.15 && \
+    /ctf/build_glibc.sh 2.19 && \
+    /ctf/build_glibc.sh 2.21 && \
     /ctf/build_glibc.sh 2.23 && \
     /ctf/build_glibc.sh 2.24 && \
-    /ctf/build_glibc.sh 2.26
+    /ctf/build_glibc.sh 2.26 && \
+    /ctf/build_glibc.sh 2.28
 
 ENTRYPOINT ["/bin/bash"]
