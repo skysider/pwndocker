@@ -60,7 +60,8 @@ RUN python -m pip install -U pip setuptools && \
     lief \
     smmap2 \
     z3-solver \
-    apscheduler && \
+    apscheduler \
+    ropper && \
     python -m pip install -i https://pypi.doubanio.com/simple/  \
     --trusted-host pypi.doubanio.com \
     --upgrade pwntools
