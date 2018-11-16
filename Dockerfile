@@ -13,6 +13,7 @@ RUN dpkg --add-architecture i386 && \
     g++-multilib \
     cmake \
     python \
+    ipython \
     python-pip \
     python3 \
     python3-pip \
@@ -57,7 +58,6 @@ RUN python -m pip install -U pip setuptools && \
     ropgadget \
     pwntools \
     zio \
-    lief \
     smmap2 \
     z3-solver \
     apscheduler \
@@ -78,7 +78,7 @@ RUN git clone https://github.com/skysider/LibcSearcher.git  LibcSearcher && \
     cd libc-database && git pull origin master && cd .. && \
     python setup.py develop && cd libc-database && ./get || ls
 
-RUN git clone https://github.com/skysider/welpwn && cd welpwn && \
+RUN git clone https://github.com/matrix1001/welpwn && cd welpwn && \
     python setup.py install && cd .. && rm -rf welpwn && \
     echo "/LibcSearcher/libc-database/" > ~/.libcdb_path
 
