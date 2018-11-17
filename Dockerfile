@@ -38,6 +38,7 @@ RUN dpkg --add-architecture i386 && \
     gawk \
     file \
     sshpass \
+    vim \
     bison --fix-missing && \
     rm -rf /var/lib/apt/list/*
 
