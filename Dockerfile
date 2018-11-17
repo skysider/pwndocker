@@ -73,14 +73,12 @@ RUN gem install \
 RUN git clone https://github.com/pwndbg/pwndbg && \
     cd pwndbg && chmod +x setup.sh && ./setup.sh
 
-RUN git clone https://github.com/skysider/LibcSearcher.git  LibcSearcher && \
-    cd LibcSearcher && git submodule update --init --recursive && \
-    cd libc-database && git pull origin master && cd .. && \
-    python setup.py develop && cd libc-database && ./get || ls
+RUN git clone https://github.com/niklasb/libc-database.git libc-database && \
+    cd libc-database && ./get || ls
 
 RUN git clone https://github.com/matrix1001/welpwn && cd welpwn && \
     python setup.py install && cd .. && rm -rf welpwn && \
-    echo "/LibcSearcher/libc-database/" > ~/.libcdb_path
+    echo "/libc-database/" > ~/.libcdb_path
 
 WORKDIR /ctf/work/
 
