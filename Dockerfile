@@ -10,6 +10,8 @@ RUN dpkg --add-architecture i386 && \
     lib32stdc++6 \
     g++-multilib \
     cmake \
+    ipython \
+    vim \
     net-tools \
     libffi-dev \
     libssl-dev \
@@ -62,23 +64,23 @@ RUN pip install --upgrade setuptools && \
     --trusted-host pypi.doubanio.com \
     --upgrade pwntools
 
-RUN gem install \
-    one_gadget && \
-    rm -rf /var/lib/gems/2.3.*/cache/*
+RUN gem install one_gadget && rm -rf /var/lib/gems/2.3.*/cache/*
 
 RUN git clone https://github.com/pwndbg/pwndbg && \
     cd pwndbg && chmod +x setup.sh && ./setup.sh
 
-RUN git clone https://github.com/skysider/LibcSearcher.git LibcSearcher && \
-    cd LibcSearcher && git submodule update --init --recursive && \
-    cd libc-database && git pull origin master && cd .. && \
-    python setup.py develop && cd libc-database && ./get || ls
+RUN git clone https://github.com/niklasb/libc-database.git libc-database && \
+    cd libc-database && ./get || ls
+
+RUN git clone https://github.com/matrix1001/welpwn && cd welpwn && \
+    python setup.py install && cd .. && rm -rf welpwn && \
+    echo "/libc-database/" > ~/.libcdb_path
 
 WORKDIR /ctf/work/
 
 COPY linux_server linux_server64 build_glibc.sh /ctf/
 
 RUN chmod a+x /ctf/linux_server /ctf/linux_server64 /ctf/build_glibc.sh && \
-    /ctf/build_glibc.sh 2.24 && /ctf/build_glibc.sh 2.27
+    /ctf/build_glibc.sh 2.19 && /ctf/build_glibc.sh 2.24 &&\ /ctf/build_glibc.sh 2.27 && /ctf/build_glibc.sh 2.28
 
 ENTRYPOINT ["/bin/bash"]

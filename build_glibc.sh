@@ -4,9 +4,15 @@ cd /ctf/work
 wget http://mirrors.ustc.edu.cn/gnu/libc/glibc-${GLIBC_VERSION}.tar.gz
 tar xf glibc-${GLIBC_VERSION}.tar.gz
 cd glibc-${GLIBC_VERSION}
-mkdir build
-cd build
-../configure --prefix=/glibc/${GLIBC_VERSION}/ --disable-werror --enable-debug=yes
+mkdir build64
+cd build64
+../configure --prefix=/glibc/${GLIBC_VERSION}/64/ --disable-werror --enable-debug=yes
+make
+make install
+cd ..
+mkdir build32
+cd build32
+../configure --prefix=/glibc/${GLIBC_VERSION}/32/ --disable-werror --enable-debug=yes CC="gcc -m32" CXX="g++ -m32" i686-linux-gnu
 make
 make install
 cd ../../
