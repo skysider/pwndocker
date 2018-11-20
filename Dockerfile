@@ -41,8 +41,6 @@ RUN wget https://bootstrap.pypa.io/get-pip.py && \
     rm get-pip.py
 
 RUN pip3 install --no-cache-dir \
-    -i https://pypi.doubanio.com/simple/  \
-    --trusted-host pypi.doubanio.com \
     ropper \
     unicorn \
     keystone-engine \
@@ -51,8 +49,6 @@ RUN pip3 install --no-cache-dir \
 
 RUN pip install --upgrade setuptools && \
     pip install --no-cache-dir \
-    -i https://pypi.doubanio.com/simple/  \
-    --trusted-host pypi.doubanio.com \
     ropgadget \
     pwntools \
     zio \
@@ -60,9 +56,7 @@ RUN pip install --upgrade setuptools && \
     smmap2 \
     z3-solver \
     apscheduler && \
-    pip install -i https://pypi.doubanio.com/simple/  \
-    --trusted-host pypi.doubanio.com \
-    --upgrade pwntools
+    pip install --upgrade pwntools
 
 RUN gem install one_gadget && rm -rf /var/lib/gems/2.3.*/cache/*
 
