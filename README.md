@@ -46,3 +46,11 @@ cp /glibc/2.27/64/lib/ld-2.27.so /tmp/ld-2.27.so
 patchelf --set-interpreter /tmp/ld-2.27.so ./test
 LD_PRELOAD=./libc.so.6 ./test
 ```
+
+or
+
+```python
+from pwn import *
+p = process(["/path/to/ld.so", "./test"], env={"LD_PRELOAD":"/path/to/libc.so.6"})
+
+```
