@@ -28,3 +28,29 @@ A docker environment for pwn in ctf based on **ubuntu18.04**
 - [tmux](https://tmux.github.io/) 	—— a terminal multiplexer
 - [ltrace](https://linux.die.net/man/1/ltrace)	—— trace library function call
 - [strace](https://linux.die.net/man/1/strace) —— trace system call
+
+### included glibc
+
+Default compiled glibc path is `/glibc`.
+
+- 2.19  —— ubuntu 12.04 default libc version
+- 2.23  —— ubuntu 16.04 default libc version
+- 2.24  —— introduce vtable check in file struct
+- 2.27  —— ubuntu 18.04 (intruduce tcache in heap since 2.26)
+- 2.28  —— latest libc version
+
+#### How to run in custom libc version?
+
+```shell
+cp /glibc/2.28/64/lib/ld-2.28.so /tmp/ld-2.28.so
+patchelf --set-interpreter /tmp/ld-2.28.so ./test
+LD_PRELOAD=./libc.so.6 ./test
+```
+
+or
+
+```python
+from pwn import *
+p = process(["/path/to/ld.so", "./test"], env={"LD_PRELOAD":"/path/to/libc.so.6"})
+
+```

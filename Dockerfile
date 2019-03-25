@@ -62,7 +62,8 @@ RUN python -m pip install -U pip setuptools && \
     smmap2 \
     z3-solver \
     apscheduler \
-    ropper && \
+    ropper \
+    pycrypto && \
     python -m pip install -i https://pypi.doubanio.com/simple/  \
     --trusted-host pypi.doubanio.com \
     --upgrade pwntools
@@ -75,11 +76,7 @@ RUN git clone https://github.com/pwndbg/pwndbg && \
     cd pwndbg && chmod +x setup.sh && ./setup.sh
 
 RUN git clone https://github.com/niklasb/libc-database.git libc-database && \
-    cd libc-database && ./get || ls
-
-RUN git clone https://github.com/matrix1001/welpwn && cd welpwn && \
-    python setup.py install && cd .. && rm -rf welpwn && \
-    echo "/libc-database/" > ~/.libcdb_path
+    cd libc-database && ./get || echo "/libc-database/" > ~/.libcdb_path
 
 WORKDIR /ctf/work/
 
