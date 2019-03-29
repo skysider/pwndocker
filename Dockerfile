@@ -75,6 +75,10 @@ RUN gem install \
 RUN git clone https://github.com/pwndbg/pwndbg && \
     cd pwndbg && chmod +x setup.sh && ./setup.sh
 
+RUN git clone https://github.com/scwuaptx/Pwngdb.git ~ && \
+    cd Pwngdb && cat ~/Pwngdb/.gdbinit ~/ >> ~/.gdbinit && \
+    sed -i "s?source ~/peda/peda.py?# source ~/peda/peda.py?g" ~/.gdbinit
+
 RUN git clone https://github.com/niklasb/libc-database.git libc-database && \
     cd libc-database && ./get || echo "/libc-database/" > ~/.libcdb_path
 

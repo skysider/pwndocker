@@ -14,11 +14,12 @@ A docker environment for pwn in ctf based on **ubuntu18.04**
 		skysider/pwndocker:18.04
 
 
-​	
+​
 ### included software
 
 - [pwntools](https://github.com/Gallopsled/pwntools) 	—— CTF framework and exploit development library
-- [gef](https://github.com/hugsy/gef)  ——  A kick-ass set of commands for X86, ARM, MIPS, PowerPC and SPARC to make GDB cool again for exploit dev
+- [pwndbg](https://github.com/pwndbg/pwndbg#readme)  ——  Exploit Development and Reverse Engineering with GDB Made Easy
+- [pwngdb](https://github.com/scwuaptx/Pwngdb) —— gdb for pwn
 - [ROPgadget](https://github.com/JonathanSalwan/ROPgadget) 	—— facilitate ROP exploitation tool
 - [roputils](https://github.com/inaz2/roputils) 	—— A Return-oriented Programming toolkit
 - [one_gadget](https://github.com/david942j/one_gadget) —— A searching one-gadget of execve('/bin/sh', NULL, NULL) tool for amd64 and i386
