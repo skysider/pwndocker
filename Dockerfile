@@ -88,4 +88,6 @@ RUN /ctf/build_glibc.sh 2.27
 
 RUN /ctf/build_glibc.sh 2.28
 
+RUN /ctf/build_glibc.sh 2.29
+
 ENTRYPOINT ["/bin/bash"]
