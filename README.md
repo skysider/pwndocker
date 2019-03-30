@@ -18,7 +18,7 @@ A docker environment for pwn in ctf based on **phusion/baseimage**, which is a m
 
 - [pwntools](https://github.com/Gallopsled/pwntools)  —— CTF framework and exploit development library
 - [pwndbg](https://github.com/pwndbg/pwndbg)  —— a GDB plug-in that makes debugging with GDB suck less, with a focus on features needed by low-level software developers, hardware hackers, reverse-engineers and exploit developers
-- [pwngdb](https://github.com/pwngdb/pwngdb) —— gdb for pwn
+- [pwngdb](https://github.com/scwuaptx/Pwngdb) —— gdb for pwn
 - [ROPgadget](https://github.com/JonathanSalwan/ROPgadget)  —— facilitate ROP exploitation tool
 - [roputils](https://github.com/inaz2/roputils) 	—— A Return-oriented Programming toolkit
 - [one_gadget](https://github.com/david942j/one_gadget) —— A searching one-gadget of execve('/bin/sh', NULL, NULL) tool for amd64 and i386
