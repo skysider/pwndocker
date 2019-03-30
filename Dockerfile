@@ -63,6 +63,10 @@ RUN gem install one_gadget && rm -rf /var/lib/gems/2.3.*/cache/*
 RUN git clone https://github.com/pwndbg/pwndbg && \
     cd pwndbg && chmod +x setup.sh && ./setup.sh
 
+RUN git clone https://github.com/scwuaptx/Pwngdb.git /root/Pwngdb && \
+    cd /root/Pwngdb && cat /root/Pwngdb/.gdbinit  >> /root/.gdbinit && \
+    sed -i "s?source ~/peda/peda.py?# source ~/peda/peda.py?g" /root/.gdbinit
+
 RUN git clone https://github.com/niklasb/libc-database.git libc-database && \
     cd libc-database && ./get || ls
 
@@ -74,8 +78,14 @@ WORKDIR /ctf/work/
 
 COPY linux_server linux_server64 build_glibc.sh /ctf/
 
-RUN chmod a+x /ctf/linux_server /ctf/linux_server64 /ctf/build_glibc.sh && \
-    /ctf/build_glibc.sh 2.19 && /ctf/build_glibc.sh 2.24 && \
-    /ctf/build_glibc.sh 2.27 && /ctf/build_glibc.sh 2.28
+RUN chmod a+x /ctf/linux_server /ctf/linux_server64 
+
+RUN /ctf/build_glibc.sh 2.19
+
+RUN /ctf/build_glibc.sh 2.24
+
+RUN /ctf/build_glibc.sh 2.27 
+
+RUN /ctf/build_glibc.sh 2.28
 
 ENTRYPOINT ["/bin/bash"]
