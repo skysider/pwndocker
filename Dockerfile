@@ -54,8 +54,6 @@ RUN python3 -m pip install -U pip && \
 
 RUN python -m pip install -U pip setuptools && \
     python -m pip install --no-cache-dir \
-    -i https://pypi.doubanio.com/simple/  \
-    --trusted-host pypi.doubanio.com \
     ropgadget \
     pwntools \
     zio \
@@ -64,9 +62,7 @@ RUN python -m pip install -U pip setuptools && \
     apscheduler \
     ropper \
     pycrypto && \
-    python -m pip install -i https://pypi.doubanio.com/simple/  \
-    --trusted-host pypi.doubanio.com \
-    --upgrade pwntools
+    python -m pip install --upgrade pwntools
 
 RUN gem install \
     one_gadget && \
@@ -75,9 +71,9 @@ RUN gem install \
 RUN git clone https://github.com/pwndbg/pwndbg && \
     cd pwndbg && chmod +x setup.sh && ./setup.sh
 
-RUN git clone https://github.com/scwuaptx/Pwngdb.git ~ && \
-    cd Pwngdb && cat ~/Pwngdb/.gdbinit ~/ >> ~/.gdbinit && \
-    sed -i "s?source ~/peda/peda.py?# source ~/peda/peda.py?g" ~/.gdbinit
+RUN git clone https://github.com/scwuaptx/Pwngdb.git /root/Pwngdb && \
+    cd /root/Pwngdb && cat /root/Pwngdb/.gdbinit  >> /root/.gdbinit && \
+    sed -i "s?source ~/peda/peda.py?# source ~/peda/peda.py?g" /root/.gdbinit
 
 RUN git clone https://github.com/niklasb/libc-database.git libc-database && \
     cd libc-database && ./get || echo "/libc-database/" > ~/.libcdb_path
@@ -86,8 +82,16 @@ WORKDIR /ctf/work/
 
 COPY linux_server linux_server64 build_glibc.sh /ctf/
 
-RUN chmod +x /ctf/linux_server /ctf/linux_server64 /ctf/build_glibc.sh && \
-    /ctf/build_glibc.sh 2.19 && /ctf/build_glibc.sh 2.23 && \
-    /ctf/build_glibc.sh 2.24 && /ctf/build_glibc.sh 2.28
+RUN chmod +x /ctf/linux_server /ctf/linux_server64 /ctf/build_glibc.sh 
+
+RUN /ctf/build_glibc.sh 2.19
+
+RUN /ctf/build_glibc.sh 2.23
+
+RUN /ctf/build_glibc.sh 2.24
+
+RUN /ctf/build_glibc.sh 2.28
+
+RUN /ctf/build_glibc.sh 2.29
 
 ENTRYPOINT ["/bin/bash"]
