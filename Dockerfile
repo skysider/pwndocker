@@ -68,26 +68,14 @@ RUN git clone https://github.com/scwuaptx/Pwngdb.git /root/Pwngdb && \
     sed -i "s?source ~/peda/peda.py?# source ~/peda/peda.py?g" /root/.gdbinit
 
 RUN git clone https://github.com/niklasb/libc-database.git libc-database && \
-    cd libc-database && ./get || ls
-
-RUN git clone https://github.com/matrix1001/welpwn && cd welpwn && \
-    python setup.py install && cd .. && rm -rf welpwn && \
-    echo "/libc-database/" > ~/.libcdb_path
+    cd libc-database && ./get || echo "/libc-database/" > ~/.libcdb_path
 
 WORKDIR /ctf/work/
 
-COPY linux_server linux_server64 build_glibc.sh /ctf/
+COPY --from=skysider/glibc_builder64:2.24 /glibc/2.24/64 /glibc/2.24/64
 
-RUN chmod a+x /ctf/linux_server /ctf/linux_server64 
+COPY linux_server linux_server64  /ctf/
 
-RUN /ctf/build_glibc.sh 2.19
-
-RUN /ctf/build_glibc.sh 2.24
-
-RUN /ctf/build_glibc.sh 2.27 
-
-RUN /ctf/build_glibc.sh 2.28
-
-RUN /ctf/build_glibc.sh 2.29
+RUN chmod a+x /ctf/linux_server /ctf/linux_server64
 
 ENTRYPOINT ["/bin/bash"]
