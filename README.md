@@ -39,7 +39,6 @@ Default compiled glibc path is `/glibc`.
 - 2.24  —— introduce vtable check in file struct
 - 2.27  —— intruduce tcache in heap (since 2.26)
 - 2.28  —— new libc version
-- 2.29  —— latest libc version
 #### How to run in custom libc version?
 
 ```shell
