@@ -1,5 +1,7 @@
-FROM phusion/baseimage:latest
+FROM phusion/baseimage:master-amd64
 MAINTAINER skysider <skysider@163.com>
+
+COPY sources.list /etc/apt/sources.list
 
 RUN dpkg --add-architecture i386 && \
     apt-get -y update && \
@@ -13,11 +15,13 @@ RUN dpkg --add-architecture i386 && \
     ipython \
     vim \
     net-tools \
+    iputils-ping \
     libffi-dev \
     libssl-dev \
     python-dev \
     build-essential \
-    ruby2.3 \
+    ruby \
+    ruby-dev \
     tmux \
     strace \
     ltrace \
@@ -32,6 +36,7 @@ RUN dpkg --add-architecture i386 && \
     patchelf \
     gawk \
     file \
+    python3-distutils \
     bison --fix-missing && \
     rm -rf /var/lib/apt/list/*
 
@@ -61,7 +66,9 @@ RUN pip install --upgrade setuptools && \
     apscheduler && \
     pip install --upgrade pwntools
 
-RUN gem install one_gadget && rm -rf /var/lib/gems/2.3.*/cache/*
+RUN gem install one_gadget seccomp-tools && rm -rf /var/lib/gems/2.*/cache/*
+
+COPY pip.conf /root/.pip/pip.conf
 
 RUN git clone https://github.com/pwndbg/pwndbg && \
     cd pwndbg && chmod +x setup.sh && ./setup.sh
@@ -78,11 +85,11 @@ WORKDIR /ctf/work/
 COPY --from=skysider/glibc_builder64:2.19 /glibc/2.19/64 /glibc/2.19/64
 COPY --from=skysider/glibc_builder32:2.19 /glibc/2.19/32 /glibc/2.19/32
 
+COPY --from=skysider/glibc_builder64:2.23 /glibc/2.23/64 /glibc/2.23/64
+COPY --from=skysider/glibc_builder32:2.23 /glibc/2.23/32 /glibc/2.23/32
+
 COPY --from=skysider/glibc_builder64:2.24 /glibc/2.24/64 /glibc/2.24/64
 COPY --from=skysider/glibc_builder32:2.24 /glibc/2.24/32 /glibc/2.24/32
-
-COPY --from=skysider/glibc_builder64:2.27 /glibc/2.27/64 /glibc/2.27/64
-COPY --from=skysider/glibc_builder32:2.27 /glibc/2.27/32 /glibc/2.27/32
 
 COPY --from=skysider/glibc_builder64:2.28 /glibc/2.28/64 /glibc/2.28/64
 COPY --from=skysider/glibc_builder32:2.28 /glibc/2.28/32 /glibc/2.28/32
@@ -91,4 +98,4 @@ COPY linux_server linux_server64  /ctf/
 
 RUN chmod a+x /ctf/linux_server /ctf/linux_server64
 
-ENTRYPOINT ["/bin/bash"]
+CMD ["/sbin/my_init"]
