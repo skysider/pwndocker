@@ -66,6 +66,9 @@ RUN pip install --upgrade setuptools && \
     apscheduler && \
     pip install --upgrade pwntools
 
+RUN wget https://raw.githubusercontent.com/inaz2/roputils/master/roputils.py && \
+    mv roputils.py /usr/lib/python2.7/
+
 RUN gem install one_gadget seccomp-tools && rm -rf /var/lib/gems/2.*/cache/*
 
 COPY pip.conf /root/.pip/pip.conf
@@ -93,6 +96,9 @@ COPY --from=skysider/glibc_builder32:2.24 /glibc/2.24/32 /glibc/2.24/32
 
 COPY --from=skysider/glibc_builder64:2.28 /glibc/2.28/64 /glibc/2.28/64
 COPY --from=skysider/glibc_builder32:2.28 /glibc/2.28/32 /glibc/2.28/32
+
+COPY --from=skysider/glibc_builder64:2.29 /glibc/2.29/64 /glibc/2.29/64
+COPY --from=skysider/glibc_builder32:2.29 /glibc/2.29/32 /glibc/2.29/32
 
 COPY linux_server linux_server64  /ctf/
 

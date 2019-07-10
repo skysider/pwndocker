@@ -12,6 +12,8 @@ A docker environment for pwn in ctf based on **phusion/baseimage:master-amd64**,
 		-p 23946:23946 \
 		--cap-add=SYS_PTRACE \
 		skysider/pwndocker
+	
+	docker exec -it ${ctf_name} /bin/bash
 
 
 ### included software
@@ -39,6 +41,7 @@ Default compiled glibc path is `/glibc`.
 - 2.24  —— introduce vtable check in file struct
 - 2.27  —— pwndocker default glibc version
 - 2.28  —— new libc version
+- 2.29  —— latest libc version
 #### How to run in custom libc version?
 
 ```shell
