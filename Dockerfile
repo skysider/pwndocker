@@ -19,6 +19,7 @@ RUN dpkg --add-architecture i386 && \
     libffi-dev \
     libssl-dev \
     python-dev \
+    python3-dev \
     build-essential \
     ruby \
     ruby-dev \
@@ -52,7 +53,8 @@ RUN python3 -m pip install -U pip && \
     ropper \
     unicorn \
     keystone-engine \
-    capstone
+    capstone \
+    angr
 
 RUN pip install --upgrade setuptools && \
     pip install --no-cache-dir \
