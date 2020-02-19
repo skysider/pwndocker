@@ -57,3 +57,9 @@ from pwn import *
 p = process(["/path/to/ld.so", "./test"], env={"LD_PRELOAD":"/path/to/libc.so.6"})
 
 ```
+
+### ChangeLog
+
+#### 2020-02-19
+
+python packages switched to python3 version, remove roputils.py

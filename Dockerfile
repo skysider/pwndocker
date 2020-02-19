@@ -12,14 +12,14 @@ RUN dpkg --add-architecture i386 && \
     lib32stdc++6 \
     g++-multilib \
     cmake \
-    ipython \
+    ipython3 \
     vim \
     net-tools \
     iputils-ping \
     libffi-dev \
     libssl-dev \
-    python-dev \
     python3-dev \
+    python3-pip \
     build-essential \
     ruby \
     ruby-dev \
@@ -41,48 +41,32 @@ RUN dpkg --add-architecture i386 && \
     bison --fix-missing && \
     rm -rf /var/lib/apt/list/*
 
-RUN wget https://bootstrap.pypa.io/get-pip.py && \
-    python3 get-pip.py && \
-    python get-pip.py && \
-    rm get-pip.py
+COPY pip.conf /root/.pip/pip.conf
 
 RUN python3 -m pip install -U pip && \
     python3 -m pip install --no-cache-dir \
-    -i https://pypi.doubanio.com/simple/  \
-    --trusted-host pypi.doubanio.com \
+    ropgadget \
+    pwntools \
+    z3-solver \
+    smmap2 \
+    apscheduler \
     ropper \
     unicorn \
     keystone-engine \
     capstone \
-    angr
-
-RUN pip install --upgrade setuptools && \
-    pip install --no-cache-dir \
-    -i https://pypi.doubanio.com/simple/  \
-    --trusted-host pypi.doubanio.com \
-    ropgadget \
-    pwntools \
-    zio \
-    smmap2 \
-    z3-solver \
-    apscheduler && \
-    pip install --upgrade pwntools
-
-RUN wget https://raw.githubusercontent.com/inaz2/roputils/master/roputils.py && \
-    mv roputils.py /usr/lib/python2.7/
+    angr \
+    pebble
 
 RUN gem install one_gadget seccomp-tools && rm -rf /var/lib/gems/2.*/cache/*
 
-COPY pip.conf /root/.pip/pip.conf
-
-RUN git clone https://github.com/pwndbg/pwndbg && \
+RUN git clone --depth 1 https://github.com/pwndbg/pwndbg && \
     cd pwndbg && chmod +x setup.sh && ./setup.sh
 
-RUN git clone https://github.com/scwuaptx/Pwngdb.git /root/Pwngdb && \
+RUN git clone --depth 1 https://github.com/scwuaptx/Pwngdb.git /root/Pwngdb && \
     cd /root/Pwngdb && cat /root/Pwngdb/.gdbinit  >> /root/.gdbinit && \
     sed -i "s?source ~/peda/peda.py?# source ~/peda/peda.py?g" /root/.gdbinit
 
-RUN git clone https://github.com/niklasb/libc-database.git libc-database && \
+RUN git clone --depth 1 https://github.com/niklasb/libc-database.git libc-database && \
     cd libc-database && ./get || echo "/libc-database/" > ~/.libcdb_path
 
 WORKDIR /ctf/work/
