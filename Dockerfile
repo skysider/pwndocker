@@ -41,8 +41,6 @@ RUN dpkg --add-architecture i386 && \
     bison --fix-missing && \
     rm -rf /var/lib/apt/list/*
 
-COPY pip.conf /root/.pip/pip.conf
-
 RUN python3 -m pip install -U pip && \
     python3 -m pip install --no-cache-dir \
     ropgadget \
