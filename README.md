@@ -40,8 +40,7 @@ Default compiled glibc path is `/glibc`.
 - 2.23  —— ubuntu 16.04 default libc version
 - 2.24  —— introduce vtable check in file struct
 - 2.27  —— pwndocker default glibc version
-- 2.28  —— new libc version
-- 2.29  —— latest libc version
+- 2.28~2.31  —— latest libc versions
 #### How to run in custom libc version?
 
 ```shell
@@ -59,6 +58,8 @@ p = process(["/path/to/ld.so", "./test"], env={"LD_PRELOAD":"/path/to/libc.so.6"
 ```
 
 ### ChangeLog
+#### 2020-04-11
+add libc 2.30 and 2.31
 
 #### 2020-02-19
 
