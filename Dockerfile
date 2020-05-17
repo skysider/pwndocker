@@ -3,6 +3,10 @@ MAINTAINER skysider <skysider@163.com>
 
 COPY sources.list /etc/apt/sources.list
 
+ENV DEBIAN_FRONTEND noninteractive
+
+ENV TZ Asia/Shanghai
+
 RUN dpkg --add-architecture i386 && \
     apt-get -y update && \
     apt install -y \
@@ -38,10 +42,15 @@ RUN dpkg --add-architecture i386 && \
     gawk \
     file \
     python3-distutils \
-    bison --fix-missing && \
+    bison \
+    tzdata --fix-missing && \
     rm -rf /var/lib/apt/list/*
 
-RUN python3 -m pip install -U pip && \
+RUN ln -fs /usr/share/zoneinfo/$TZ /etc/localtime && \
+    dpkg-reconfigure -f noninteractive tzdata
+
+RUN python3 -m pip install -U -i https://pypi.tuna.tsinghua.edu.cn/simple pip && \
+    python3 -m pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple && \
     python3 -m pip install --no-cache-dir \
     ropgadget \
     pwntools \
