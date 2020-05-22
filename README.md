@@ -58,6 +58,9 @@ p = process(["/path/to/ld.so", "./test"], env={"LD_PRELOAD":"/path/to/libc.so.6"
 ```
 
 ### ChangeLog
+#### 2020-05-22
+update radare2 to version 4.4.0 and add r2pipe python binding
+
 #### 2020-04-11
 add libc 2.30 and 2.31
 
