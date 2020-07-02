@@ -1,8 +1,6 @@
 FROM phusion/baseimage:master-amd64
 MAINTAINER skysider <skysider@163.com>
 
-COPY sources.list /etc/apt/sources.list
-
 ENV DEBIAN_FRONTEND noninteractive
 
 ENV TZ Asia/Shanghai
