@@ -49,8 +49,7 @@ RUN ln -fs /usr/share/zoneinfo/$TZ /etc/localtime && \
 RUN wget https://github.com/radareorg/radare2/releases/download/4.4.0/radare2_4.4.0_amd64.deb && \
     dpkg -i radare2_4.4.0_amd64.deb && rm radare2_4.4.0_amd64.deb
 
-RUN python3 -m pip install -U -i https://pypi.tuna.tsinghua.edu.cn/simple pip && \
-    python3 -m pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple && \
+RUN python3 -m pip install -U pip && \
     python3 -m pip install --no-cache-dir \
     ropgadget \
     pwntools \
