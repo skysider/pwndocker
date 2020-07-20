@@ -104,13 +104,11 @@ USER pwn
 ENV HOME /home/pwn
 
 RUN git clone --depth 1 https://github.com/pwndbg/pwndbg ${HOME}/pwndbg && \
-    cd ${HOME}/pwndbg && chmod +x setup.sh && ./setup.sh
-
-RUN git clone --depth 1 https://github.com/scwuaptx/Pwngdb.git /home/pwn/Pwngdb && \
-    cd /home/pwn/Pwngdb && cat /home/pwn/Pwngdb/.gdbinit  >> /home/pwn/.gdbinit && \
-    sed -i "s?source ~/peda/peda.py?# source ~/peda/peda.py?g" /home/pwn/.gdbinit
-
-RUN git clone --depth 1 https://github.com/niklasb/libc-database.git /home/pwn/libc-database && \
-    cd /home/pwn/libc-database && ./get || echo "/libc-database/" > /home/pwn/.libcdb_path
+    cd ${HOME}/pwndbg && chmod +x setup.sh && ./setup.sh && \
+    git clone --depth 1 https://github.com/scwuaptx/Pwngdb.git ${HOME}/Pwngdb && \
+    cd ${HOME}/Pwngdb && cat /home/pwn/Pwngdb/.gdbinit  >> ${HOME}/.gdbinit && \
+    sed -i "s?source ~/peda/peda.py?# source ~/peda/peda.py?g" ${HOME}/.gdbinit && \
+    git clone --depth 1 https://github.com/niklasb/libc-database.git ${HOME}/libc-database && \
+    cd ${HOME}/libc-database && ./get || echo "/libc-database/" > ${HOME}/.libcdb_path
 
 CMD ["/sbin/my_init"]
