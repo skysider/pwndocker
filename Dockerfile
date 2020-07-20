@@ -111,4 +111,4 @@ RUN git clone --depth 1 https://github.com/pwndbg/pwndbg ${HOME}/pwndbg && \
     git clone --depth 1 https://github.com/niklasb/libc-database.git ${HOME}/libc-database && \
     cd ${HOME}/libc-database && ./get || echo "/libc-database/" > ${HOME}/.libcdb_path
 
-CMD ["/sbin/my_init"]
+ENTRYPOINT ["sleep", "infinity"]
