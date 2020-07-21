@@ -8,10 +8,11 @@ A docker environment for pwn in ctf based on **phusion/baseimage:master-amd64**,
 		--rm \
 		-h ${ctf_name} \
 		--name ${ctf_name} \
+                --user $(id -u):$(id -g) \
 		-v $(pwd)/${ctf_name}:/ctf/work \
 		-p 23946:23946 \
 		--cap-add=SYS_PTRACE \
-		skysider/pwndocker
+		luckycatalex/pwndocker
 	
 	docker exec -it ${ctf_name} /bin/bash
 
