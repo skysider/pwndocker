@@ -39,8 +39,9 @@ Default compiled glibc path is `/glibc`.
 - 2.19  —— ubuntu 12.04 default libc version
 - 2.23  —— ubuntu 16.04 default libc version
 - 2.24  —— introduce vtable check in file struct
-- 2.27  —— pwndocker default glibc version
-- 2.28~2.31  —— latest libc versions
+- 2.27  —— ubuntu 18.04 default glibc version
+- 2.28~2.30  —— latest libc versions
+- 2.31  —— ubuntu 20.04 default glibc version(built-in)
 #### How to run in custom libc version?
 
 ```shell
@@ -58,6 +59,9 @@ p = process(["/path/to/ld.so", "./test"], env={"LD_PRELOAD":"/path/to/libc.so.6"
 ```
 
 ### ChangeLog
+#### 2020-09-06
+update base image to 20.04(glibc 2.31) and add glibc 2.27
+
 #### 2020-05-22
 update radare2 to version 4.4.0 and add r2pipe python binding
 
