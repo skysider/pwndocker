@@ -40,6 +40,8 @@ RUN dpkg --add-architecture i386 && \
     file \
     python3-distutils \
     bison \
+    rpm2cpio cpio \
+    zstd \
     tzdata --fix-missing && \
     rm -rf /var/lib/apt/list/*
 
@@ -74,7 +76,7 @@ RUN git clone --depth 1 https://github.com/scwuaptx/Pwngdb.git /root/Pwngdb && \
     sed -i "s?source ~/peda/peda.py?# source ~/peda/peda.py?g" /root/.gdbinit
 
 RUN git clone --depth 1 https://github.com/niklasb/libc-database.git libc-database && \
-    cd libc-database && ./get || echo "/libc-database/" > ~/.libcdb_path
+    cd libc-database && ./get ubuntu debian || echo "/libc-database/" > ~/.libcdb_path
 
 WORKDIR /ctf/work/
 
