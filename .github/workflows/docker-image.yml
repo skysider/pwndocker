@@ -20,9 +20,7 @@ jobs:
       env:
         image_name: skysider/pwndocker
         tag: latest
-      run: docker build . --file Dockerfile --tag $image_name:$tag
-    - name: login the docker hub
-      run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWD }}
-    - name: push the docker image
-      run: docker push $image_name:$tag
-        
+      run: |
+        docker build . --file Dockerfile --tag $image_name:$tag
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWD }}
+        docker push $image_name:$tag
