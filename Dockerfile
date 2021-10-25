@@ -75,7 +75,7 @@ RUN git clone --depth 1 https://github.com/pwndbg/pwndbg && \
 RUN git clone --depth 1 https://github.com/scwuaptx/Pwngdb.git ~/Pwngdb && \
     cd ~/Pwngdb && mv .gdbinit .gdbinit-pwngdb && \
     sed -i "s?source ~/peda/peda.py?# source ~/peda/peda.py?g" .gdbinit-pwngdb && \
-    echo "source /root/Pwngdb/.gdbinit-pwngdb" >> ~/.gdbinit
+    echo "source ~/Pwngdb/.gdbinit-pwngdb" >> ~/.gdbinit
 
 RUN wget -O ~/.gdbinit-gef.py -q http://gef.blah.cat/py
 
