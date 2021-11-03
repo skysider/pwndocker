@@ -55,7 +55,7 @@ RUN version=$(curl https://github.com/radareorg/radare2/releases/latest | grep -
 RUN python3 -m pip install -U pip && \
     python3 -m pip install --no-cache-dir \
     ropgadget \
-    pwntools \
+    pwntools==4.5.1 \
     z3-solver \
     smmap2 \
     apscheduler \
