@@ -4,16 +4,8 @@ A docker environment for pwn in ctf based on **phusion/baseimage:master-amd64**,
 
 ### Usage
 
-	docker run -d \
-		--rm \
-		-h ${ctf_name} \
-		--name ${ctf_name} \
-		-v $(pwd)/${ctf_name}:/ctf/work \
-		-p 23946:23946 \
-		--cap-add=SYS_PTRACE \
-		skysider/pwndocker
-	
-	docker exec -it ${ctf_name} /bin/bash
+	docker-compose up -d
+	docker exec -it pwn_test /bin/bash
 
 
 ### included software
@@ -99,6 +91,9 @@ root@pwn:/ctf/work# /glibc/2.28/64/ld-2.28.so /bin/ls -l /
 ```
 
 ### ChangeLog
+
+#### 2022-2-10
+add docker-compose.yml
 
 #### 2021-10-25
 add docker build action and update radare2 version to latest

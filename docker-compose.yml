@@ -1,0 +1,9 @@
+version: '3'
+services:
+    pwn:
+        container_name: pwn_test
+        image: skysider/pwndocker
+        cap_add:
+            - SYS_PTRACE
+        ports:
+            - "23946:23946"
