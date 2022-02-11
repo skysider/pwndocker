@@ -1,10 +1,10 @@
-name: Docker Image CI
+name: Docker Image CI minimal
 
 on:
   push:
-    branches: [ master ]
+    branches: [ minimal ]
   pull_request:
-    branches: [ master ]
+    branches: [ minimal ]
     
   workflow_dispatch:
 
@@ -19,7 +19,7 @@ jobs:
     - name: Build the Docker image
       env:
         image_name: skysider/pwndocker
-        tag: latest
+        tag: minimal
       run: |
         docker build . --file Dockerfile --tag $image_name:$tag
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWD }}
