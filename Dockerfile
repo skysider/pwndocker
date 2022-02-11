@@ -49,13 +49,14 @@ RUN ln -fs /usr/share/zoneinfo/$TZ /etc/localtime && \
     dpkg-reconfigure -f noninteractive tzdata
     
 RUN version=$(curl https://github.com/radareorg/radare2/releases/latest | grep -P '/tag/\K.*?(?=")' -o) && \
+    version=5.5.4 && \
     wget https://github.com/radareorg/radare2/releases/download/${version}/radare2_${version}_amd64.deb && \
     dpkg -i radare2_${version}_amd64.deb && rm radare2_${version}_amd64.deb
 
 RUN python3 -m pip install -U pip && \
     python3 -m pip install --no-cache-dir \
     ropgadget \
-    pwntools==4.5.1 \
+    pwntools \
     z3-solver \
     smmap2 \
     apscheduler \
