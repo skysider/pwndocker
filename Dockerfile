@@ -81,7 +81,8 @@ RUN git clone --depth 1 https://github.com/scwuaptx/Pwngdb.git ~/Pwngdb && \
 RUN wget -O ~/.gdbinit-gef.py -q http://gef.blah.cat/py
 
 RUN git clone --depth 1 https://github.com/niklasb/libc-database.git libc-database && \
-    cd libc-database && ./get ubuntu debian || echo "/libc-database/" > ~/.libcdb_path
+    cd libc-database && ./get ubuntu debian || echo "/libc-database/" > ~/.libcdb_path && \
+    rm -rf /tmp/*
 
 WORKDIR /ctf/work/
 
