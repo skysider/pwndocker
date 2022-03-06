@@ -21,6 +21,6 @@ jobs:
         image_name: skysider/pwndocker
         tag: latest
       run: |
-        docker build . --file Dockerfile --tag $image_name:$tag
+        docker build . --file Dockerfile --tag $image_name:$tag --build-arg PWNTOOLS_VERSION=${{ secrets.PWNTOOLS_VERSION }}
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWD }}
         docker push $image_name:$tag
