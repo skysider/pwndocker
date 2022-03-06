@@ -92,6 +92,9 @@ root@pwn:/ctf/work# /glibc/2.28/64/ld-2.28.so /bin/ls -l /
 
 ### ChangeLog
 
+#### 2022-03-06
+add `pwntools_version` docker build argument, `4.8.0b0` is set in repo docker build actions
+
 #### 2022-2-10
 add docker-compose.yml
 
