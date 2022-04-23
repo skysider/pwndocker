@@ -19,7 +19,7 @@ jobs:
       env:
         image_name: skysider/pwndocker
         tag: latest
-        pwntools_version: 4.8.0b0
+        pwntools_version: 4.8.0
       run: |
         docker build . --file Dockerfile --tag $image_name:$tag --build-arg PWNTOOLS_VERSION=$pwntools_version
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWD }}
