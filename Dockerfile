@@ -1,4 +1,4 @@
-FROM phusion/baseimage:master-amd64
+FROM phusion/baseimage:focal-1.2.0
 LABEL maintainer="skysider <skysider@163.com>"
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -48,11 +48,13 @@ RUN dpkg --add-architecture i386 && \
 RUN ln -fs /usr/share/zoneinfo/$TZ /etc/localtime && \
     dpkg-reconfigure -f noninteractive tzdata
     
-RUN version=$(curl https://github.com/radareorg/radare2/releases/latest | grep -P '/tag/\K.*?(?=")' -o) && \
+RUN version=$(curl -s https://api.github.com/repos/radareorg/radare2/releases/latest | grep -P '"tag_name": "(.*)"' -o| awk '{print $2}' | awk -F"\"" '{print $2}') && \
     wget https://github.com/radareorg/radare2/releases/download/${version}/radare2_${version}_amd64.deb && \
     dpkg -i radare2_${version}_amd64.deb && rm radare2_${version}_amd64.deb
 
-RUN python3 -m pip install -U pip && \
+RUN python3 -m pip config set global.index-url http://pypi.tuna.tsinghua.edu.cn/simple && \
+    python3 -m pip config set global.trusted-host pypi.tuna.tsinghua.edu.cn && \
+    python3 -m pip install -U pip && \
     python3 -m pip install --no-cache-dir \
     ropgadget \
     z3-solver \
@@ -93,6 +95,9 @@ COPY --from=skysider/glibc_builder32:2.23 /glibc/2.23/32 /glibc/2.23/32
 COPY --from=skysider/glibc_builder64:2.24 /glibc/2.24/64 /glibc/2.24/64
 COPY --from=skysider/glibc_builder32:2.24 /glibc/2.24/32 /glibc/2.24/32
 
+COPY --from=skysider/glibc_builder64:2.27 /glibc/2.27/64 /glibc/2.27/64
+COPY --from=skysider/glibc_builder32:2.27 /glibc/2.27/32 /glibc/2.27/32
+
 COPY --from=skysider/glibc_builder64:2.28 /glibc/2.28/64 /glibc/2.28/64
 COPY --from=skysider/glibc_builder32:2.28 /glibc/2.28/32 /glibc/2.28/32
 
@@ -102,8 +107,17 @@ COPY --from=skysider/glibc_builder32:2.29 /glibc/2.29/32 /glibc/2.29/32
 COPY --from=skysider/glibc_builder64:2.30 /glibc/2.30/64 /glibc/2.30/64
 COPY --from=skysider/glibc_builder32:2.30 /glibc/2.30/32 /glibc/2.30/32
 
-COPY --from=skysider/glibc_builder64:2.27 /glibc/2.27/64 /glibc/2.27/64
-COPY --from=skysider/glibc_builder32:2.27 /glibc/2.27/32 /glibc/2.27/32
+COPY --from=skysider/glibc_builder64:2.33 /glibc/2.33/64 /glibc/2.33/64
+COPY --from=skysider/glibc_builder32:2.33 /glibc/2.33/32 /glibc/2.33/32
+
+COPY --from=skysider/glibc_builder64:2.34 /glibc/2.34/64 /glibc/2.34/64
+COPY --from=skysider/glibc_builder32:2.34 /glibc/2.34/32 /glibc/2.34/32
+
+COPY --from=skysider/glibc_builder64:2.35 /glibc/2.35/64 /glibc/2.35/64
+COPY --from=skysider/glibc_builder32:2.35 /glibc/2.35/32 /glibc/2.35/32
+
+COPY --from=skysider/glibc_builder64:2.36 /glibc/2.36/64 /glibc/2.36/64
+COPY --from=skysider/glibc_builder32:2.36 /glibc/2.36/32 /glibc/2.36/32
 
 COPY linux_server linux_server64  /ctf/
 
