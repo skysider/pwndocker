@@ -84,7 +84,7 @@ RUN git clone --depth 1 https://github.com/niklasb/libc-database.git libc-databa
     cd libc-database && ./get ubuntu debian || echo "/libc-database/" > ~/.libcdb_path && \
     rm -rf /tmp/*
 
-WORKDIR /ctf/work/
+WORKDIR /Project/CTF/
 
 COPY --from=skysider/glibc_builder64:2.19 /glibc/2.19/64 /glibc/2.19/64
 COPY --from=skysider/glibc_builder32:2.19 /glibc/2.19/32 /glibc/2.19/32
@@ -119,9 +119,9 @@ COPY --from=skysider/glibc_builder32:2.35 /glibc/2.35/32 /glibc/2.35/32
 COPY --from=skysider/glibc_builder64:2.36 /glibc/2.36/64 /glibc/2.36/64
 COPY --from=skysider/glibc_builder32:2.36 /glibc/2.36/32 /glibc/2.36/32
 
-COPY linux_server linux_server64  /ctf/
+COPY linux_server linux_server64  /CTF/
 
-RUN chmod a+x /ctf/linux_server /ctf/linux_server64
+RUN chmod a+x /CTF/linux_server /CTF/linux_server64
 
 ARG PWNTOOLS_VERSION
 
