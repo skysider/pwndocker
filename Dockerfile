@@ -42,11 +42,14 @@ RUN dpkg --add-architecture i386 && \
     bison \
     rpm2cpio cpio \
     zstd \
+    zsh \
     tzdata --fix-missing && \
     rm -rf /var/lib/apt/list/*
 
 RUN ln -fs /usr/share/zoneinfo/$TZ /etc/localtime && \
     dpkg-reconfigure -f noninteractive tzdata
+
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     
 RUN version=$(curl -s https://api.github.com/repos/radareorg/radare2/releases/latest | grep -P '"tag_name": "(.*)"' -o| awk '{print $2}' | awk -F"\"" '{print $2}') && \
     wget https://github.com/radareorg/radare2/releases/download/${version}/radare2_${version}_amd64.deb && \
