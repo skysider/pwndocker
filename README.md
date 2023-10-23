@@ -92,6 +92,9 @@ root@pwn:/ctf/work# /glibc/2.28/64/ld-2.28.so /bin/ls -l /
 
 ### ChangeLog
 
+#### 2023-10-22
+add `zsh` and `ohmyzsh` to docker image, update `pwntools` version to 4.11.0
+
 #### 2023-01-27
 add `glibc` versions 2.33~2.36 to docker image, and update `pwntools` version to `4.9.0`
 
