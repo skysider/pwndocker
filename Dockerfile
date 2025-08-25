@@ -44,7 +44,7 @@ RUN dpkg --add-architecture i386 && \
     zstd \
     zsh \
     tzdata --fix-missing && \
-    rm -rf /var/lib/apt/list/*
+    rm -rf /var/lib/apt/lists/*
 
 RUN ln -fs /usr/share/zoneinfo/$TZ /etc/localtime && \
     dpkg-reconfigure -f noninteractive tzdata
