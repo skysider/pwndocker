@@ -71,7 +71,7 @@ RUN python3 -m pip config set global.index-url http://pypi.tuna.tsinghua.edu.cn/
     pebble \
     r2pipe
 
-RUN gem install one_gadget seccomp-tools && rm -rf /var/lib/gems/2.*/cache/*
+RUN gem install one_gadget seccomp-tools && rm -rf /var/lib/gems/*/cache/*
 
 RUN git clone --depth 1 https://github.com/pwndbg/pwndbg && \
     cd pwndbg && chmod +x setup.sh && ./setup.sh
