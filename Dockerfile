@@ -1,4 +1,4 @@
-FROM phusion/baseimage:focal-1.2.0
+FROM phusion/baseimage:noble-1.0.2
 LABEL maintainer="skysider <skysider@163.com>"
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -32,13 +32,12 @@ RUN dpkg --add-architecture i386 && \
     wget \
     gdb \
     gdb-multiarch \
-    netcat \
+    netcat-openbsd \
     socat \
     git \
     patchelf \
     gawk \
     file \
-    python3-distutils \
     bison \
     rpm2cpio cpio \
     zstd \
