@@ -32,13 +32,12 @@ RUN dpkg --add-architecture i386 && \
     wget \
     gdb \
     gdb-multiarch \
-    netcat \
+    netcat-openbsd \
     socat \
     git \
     patchelf \
     gawk \
     file \
-    python3-distutils \
     bison \
     rpm2cpio cpio \
     zstd \
