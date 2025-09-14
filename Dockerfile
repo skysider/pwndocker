@@ -126,8 +126,6 @@ COPY linux_server linux_server64  /ctf/
 
 RUN chmod a+x /ctf/linux_server /ctf/linux_server64
 
-ARG PWNTOOLS_VERSION
-
-RUN python3 -m pip install --no-cache-dir pwntools==${PWNTOOLS_VERSION}
+RUN python3 -m pip install --no-cache-dir pwntools
 
 CMD ["/sbin/my_init"]
