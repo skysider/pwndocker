@@ -1,6 +1,6 @@
 Pwndocker
 =========
-A docker environment for pwn in ctf based on **phusion/baseimage:focal-1.2.0**, which is a modified ubuntu 20.04 baseimage for docker
+A docker environment for pwn in ctf based on **phusion/baseimage:jammy-1.0.4**, which is a modified ubuntu 22.04 baseimage for docker
 
 ### Usage
 
@@ -91,6 +91,9 @@ root@pwn:/ctf/work# /glibc/2.28/64/ld-2.28.so /bin/ls -l /
 ```
 
 ### ChangeLog
+
+#### 2025-09-14
+update base image to ubuntu 22.04 and update `pwntools` version to 4.14.1
 
 #### 2023-10-22
 add `zsh` and `ohmyzsh` to docker image, update `pwntools` version to 4.11.0

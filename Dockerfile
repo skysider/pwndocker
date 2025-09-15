@@ -1,4 +1,4 @@
-FROM phusion/baseimage:focal-1.2.0
+FROM phusion/baseimage:jammy-1.0.4
 LABEL maintainer="skysider <skysider@163.com>"
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -71,7 +71,7 @@ RUN python3 -m pip config set global.index-url http://pypi.tuna.tsinghua.edu.cn/
     pebble \
     r2pipe
 
-RUN gem install one_gadget seccomp-tools && rm -rf /var/lib/gems/*/cache/*
+RUN gem install elftools one_gadget seccomp-tools && rm -rf /var/lib/gems/*/cache/*
 
 RUN git clone --depth 1 https://github.com/pwndbg/pwndbg && \
     cd pwndbg && chmod +x setup.sh && ./setup.sh
@@ -126,8 +126,6 @@ COPY linux_server linux_server64  /ctf/
 
 RUN chmod a+x /ctf/linux_server /ctf/linux_server64
 
-ARG PWNTOOLS_VERSION
-
-RUN python3 -m pip install --no-cache-dir pwntools==${PWNTOOLS_VERSION}
+RUN python3 -m pip install --no-cache-dir pwntools
 
 CMD ["/sbin/my_init"]
