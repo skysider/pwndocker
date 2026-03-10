@@ -62,17 +62,17 @@ libpcre2-8.so.0 => /lib/x86_64-linux-gnu/libpcre2-8.so.0 (0x00007f004061c000)
 libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f0040616000)
 /lib64/ld-linux-x86-64.so.2 (0x00007f00408f8000)
 
-root@pwn:/ctf/work# /glibc/2.28/64/ld-2.28.so /bin/ls
+root@pwn:/ctf/work# /var/lib/libc-database/libs/<glibc_version>/ld-{version}.so /bin/ls
 /bin/ls: error while loading shared libraries: libselinux.so.1: cannot open shared object file: No such file or directory
 ```
-You can copy /lib/x86_64-linux-gnu/libselinux.so.1 and /lib/x86_64-linux-gnu/libpcre2-8.so.0 to /var/lib/libc-database/libs/<glibc_version>/, and sometimes it fails because the built-in libselinux.so.1 requires higher version libc:
+You can copy `/lib/x86_64-linux-gnu/libselinux.so.1` and `/lib/x86_64-linux-gnu/libpcre2-8.so.0` to `/var/lib/libc-database/libs/<glibc_version>/`, and sometimes it fails because the built-in `libselinux.so.1` requires higher version libc:
 
 ```
 root@pwn:/ctf/work# /var/lib/libc-database/libs/<glibc_version>/ld-{version}.so /bin/ls
 /bin/ls: version `GLIBC_2.30' not found (required by libselinux.so.1)
 ```
 
-it can be solved by copying libselinux.so.1 from ubuntu 18.04 which glibc version is 2.27 to /glibc/2.28/64/lib:
+it can be solved by copying `libselinux.so.1` from ubuntu 18.04 which glibc version is 2.27 to `/var/lib/libc-database/libs/<glibc_version>/`:
 ```
 docker run -itd --name u18 ubuntu:18.04 /bin/bash
 docker cp -L u18:/lib/x86_64-linux-gnu/libselinux.so.1 .
@@ -90,7 +90,7 @@ root@pwn:/ctf/work# /var/lib/libc-database/libs/<glibc_version>/ld-{version}.so 
 ### ChangeLog
 
 #### 2026-03-10
-update software, remove inner libc and idaserver 
+update software, remove inner libc and ida linux_server
 
 #### 2025-09-14
 update base image to ubuntu 22.04 and update `pwntools` version to 4.14.1
