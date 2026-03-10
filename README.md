@@ -24,25 +24,23 @@ A docker environment for pwn in ctf based on **phusion/baseimage:jammy-1.0.4**, 
 - [ltrace](https://linux.die.net/man/1/ltrace)      —— trace library function call
 - [strace](https://linux.die.net/man/1/strace)     —— trace system call
 
-### included glibc
-
-Default compiled glibc path is `/glibc`.
-
-- 2.19  —— ubuntu 12.04 default libc version
-- 2.23  —— ubuntu 16.04 default libc version
-- 2.24  —— introduce vtable check in file struct
-- 2.27  —— ubuntu 18.04 default glibc version
-- 2.31  —— ubuntu 20.04 default glibc version(built-in)
-- 2.28~2.30,2.33~2.36  —— latest libc versions
-
 ### Q&A
 
 #### How to run in custom libc version?
 
+try:
 ```shell
-cp /glibc/2.27/64/lib/ld-2.27.so /tmp/ld-2.27.so
-patchelf --set-interpreter /tmp/ld-2.27.so ./test
-LD_PRELOAD=./libc.so.6 ./test
+LD_PRELOAD=./libc.so.5 ./test
+
+```
+
+if failed, try to run with correct ld version:
+```shell
+cd /var/lib/libc-database
+./download <libc id> # try to get by ./identify or ./find, download ld.so and libpthread.so and so on to libs/<libc id>, refer to https://github.com/niklasb/libc-database, 
+cp libs/<glibc_version>/ld-{version}.so /tmp/ld.so
+patchelf --set-interpreter /tmp/ld.so ./test
+./test
 ```
 
 or
@@ -54,7 +52,6 @@ p = process(["/path/to/ld.so", "./test"], env={"LD_PRELOAD":"/path/to/libc.so.6"
 ```
 
 #### How to run in custom libc version with other lib?
-if you want to run binary with glibc version 2.28:
 
 ```shell
 root@pwn:/ctf/work# ldd /bin/ls
@@ -68,11 +65,11 @@ libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f0040616000)
 root@pwn:/ctf/work# /glibc/2.28/64/ld-2.28.so /bin/ls
 /bin/ls: error while loading shared libraries: libselinux.so.1: cannot open shared object file: No such file or directory
 ```
-You can copy /lib/x86_64-linux-gnu/libselinux.so.1 and /lib/x86_64-linux-gnu/libpcre2-8.so.0 to /glibc/2.28/64/lib/, and sometimes it fails because the built-in libselinux.so.1 requires higher version libc:
+You can copy /lib/x86_64-linux-gnu/libselinux.so.1 and /lib/x86_64-linux-gnu/libpcre2-8.so.0 to /var/lib/libc-database/libs/<glibc_version>/, and sometimes it fails because the built-in libselinux.so.1 requires higher version libc:
 
 ```
-root@pwn:/ctf/work# /glibc/2.28/64/ld-2.28.so /bin/ls
-/bin/ls: /glibc/2.28/64/lib/libc.so.6: version `GLIBC_2.30' not found (required by /glibc/2.28/64/lib/libselinux.so.1)
+root@pwn:/ctf/work# /var/lib/libc-database/libs/<glibc_version>/ld-{version}.so /bin/ls
+/bin/ls: version `GLIBC_2.30' not found (required by libselinux.so.1)
 ```
 
 it can be solved by copying libselinux.so.1 from ubuntu 18.04 which glibc version is 2.27 to /glibc/2.28/64/lib:
@@ -80,17 +77,20 @@ it can be solved by copying libselinux.so.1 from ubuntu 18.04 which glibc versio
 docker run -itd --name u18 ubuntu:18.04 /bin/bash
 docker cp -L u18:/lib/x86_64-linux-gnu/libselinux.so.1 .
 docker cp -L u18:/lib/x86_64-linux-gnu/libpcre2-8.so.0 .
-docker cp libselinux.so.1 pwn:/glibc/2.28/64/lib/
-docker cp libpcre2-8.so.0 pwn:/glibc/2.28/64/lib/
+docker cp libselinux.so.1 pwn:/var/lib/libc-database/libs/<glibc_version>/
+docker cp libpcre2-8.so.0 pwn:/var/lib/libc-database/libs/<glibc_version>/
 ```
 
 And now it succeeds:
 
 ```
-root@pwn:/ctf/work# /glibc/2.28/64/ld-2.28.so /bin/ls -l /
+root@pwn:/ctf/work# /var/lib/libc-database/libs/<glibc_version>/ld-{version}.so /bin/ls -l /
 ```
 
 ### ChangeLog
+
+#### 2026-03-10
+update software, remove inner libc and idaserver 
 
 #### 2025-09-14
 update base image to ubuntu 22.04 and update `pwntools` version to 4.14.1

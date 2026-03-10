@@ -36,6 +36,7 @@ RUN dpkg --add-architecture i386 && \
     socat \
     git \
     patchelf \
+    elfutils \
     gawk \
     file \
     python3-distutils \
@@ -69,12 +70,12 @@ RUN python3 -m pip config set global.index-url http://pypi.tuna.tsinghua.edu.cn/
     capstone \
     angr \
     pebble \
-    r2pipe
+    r2pipe \
+    pwntools
 
 RUN gem install elftools one_gadget seccomp-tools && rm -rf /var/lib/gems/*/cache/*
 
-RUN git clone --depth 1 https://github.com/pwndbg/pwndbg && \
-    cd pwndbg && chmod +x setup.sh && ./setup.sh
+RUN curl --proto '=https' --tlsv1.2 -LsSf 'https://install.pwndbg.re' | sh -s -- -t pwndbg-gdb
 
 RUN git clone --depth 1 https://github.com/scwuaptx/Pwngdb.git ~/Pwngdb && \
     cd ~/Pwngdb && mv .gdbinit .gdbinit-pwngdb && \
@@ -83,49 +84,10 @@ RUN git clone --depth 1 https://github.com/scwuaptx/Pwngdb.git ~/Pwngdb && \
 
 RUN wget -O ~/.gdbinit-gef.py -q http://gef.blah.cat/py
 
-RUN git clone --depth 1 https://github.com/niklasb/libc-database.git libc-database && \
-    cd libc-database && ./get ubuntu debian || echo "/libc-database/" > ~/.libcdb_path && \
+RUN git clone --depth 1 https://github.com/niklasb/libc-database.git /var/lib/libc-database && \
+    pwn libcdb fetch -u ubuntu debian && \
     rm -rf /tmp/*
 
 WORKDIR /ctf/work/
-
-COPY --from=skysider/glibc_builder64:2.19 /glibc/2.19/64 /glibc/2.19/64
-COPY --from=skysider/glibc_builder32:2.19 /glibc/2.19/32 /glibc/2.19/32
-
-COPY --from=skysider/glibc_builder64:2.23 /glibc/2.23/64 /glibc/2.23/64
-COPY --from=skysider/glibc_builder32:2.23 /glibc/2.23/32 /glibc/2.23/32
-
-COPY --from=skysider/glibc_builder64:2.24 /glibc/2.24/64 /glibc/2.24/64
-COPY --from=skysider/glibc_builder32:2.24 /glibc/2.24/32 /glibc/2.24/32
-
-COPY --from=skysider/glibc_builder64:2.27 /glibc/2.27/64 /glibc/2.27/64
-COPY --from=skysider/glibc_builder32:2.27 /glibc/2.27/32 /glibc/2.27/32
-
-COPY --from=skysider/glibc_builder64:2.28 /glibc/2.28/64 /glibc/2.28/64
-COPY --from=skysider/glibc_builder32:2.28 /glibc/2.28/32 /glibc/2.28/32
-
-COPY --from=skysider/glibc_builder64:2.29 /glibc/2.29/64 /glibc/2.29/64
-COPY --from=skysider/glibc_builder32:2.29 /glibc/2.29/32 /glibc/2.29/32
-
-COPY --from=skysider/glibc_builder64:2.30 /glibc/2.30/64 /glibc/2.30/64
-COPY --from=skysider/glibc_builder32:2.30 /glibc/2.30/32 /glibc/2.30/32
-
-COPY --from=skysider/glibc_builder64:2.33 /glibc/2.33/64 /glibc/2.33/64
-COPY --from=skysider/glibc_builder32:2.33 /glibc/2.33/32 /glibc/2.33/32
-
-COPY --from=skysider/glibc_builder64:2.34 /glibc/2.34/64 /glibc/2.34/64
-COPY --from=skysider/glibc_builder32:2.34 /glibc/2.34/32 /glibc/2.34/32
-
-COPY --from=skysider/glibc_builder64:2.35 /glibc/2.35/64 /glibc/2.35/64
-COPY --from=skysider/glibc_builder32:2.35 /glibc/2.35/32 /glibc/2.35/32
-
-COPY --from=skysider/glibc_builder64:2.36 /glibc/2.36/64 /glibc/2.36/64
-COPY --from=skysider/glibc_builder32:2.36 /glibc/2.36/32 /glibc/2.36/32
-
-COPY linux_server linux_server64  /ctf/
-
-RUN chmod a+x /ctf/linux_server /ctf/linux_server64
-
-RUN python3 -m pip install --no-cache-dir pwntools
 
 CMD ["/sbin/my_init"]
