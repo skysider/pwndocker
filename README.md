@@ -19,7 +19,6 @@ A docker environment for pwn in ctf based on **phusion/baseimage:jammy-1.0.4**, 
 - [angr](https://github.com/angr/angr)   ——  A platform-agnostic binary analysis framework
 - [radare2](https://github.com/radare/radare2) ——  A rewrite from scratch of radare in order to provide a set of libraries and tools to work with binary files
 - [seccomp-tools](https://github.com/david942j/seccomp-tools) —— Provide powerful tools for seccomp analysis
-- linux_server[64] 	—— IDA 7.0 debug server for linux
 - [tmux](https://tmux.github.io/) 	—— a terminal multiplexer
 - [ltrace](https://linux.die.net/man/1/ltrace)      —— trace library function call
 - [strace](https://linux.die.net/man/1/strace)     —— trace system call
