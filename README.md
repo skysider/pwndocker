@@ -8,6 +8,12 @@ A docker environment for pwn in ctf based on **phusion/baseimage:jammy-1.0.4**, 
 	docker exec -it pwn_test /bin/bash
 
 
+## Deploy on Hostinger
+
+Quickly deploy using Hostinger with a 1-click installation
+
+[![Deploy on Hostinger](https://assets.hostinger.com/vps/deploy.svg)](https://www.hostinger.com/vps/docker-hosting?compose_url=https://github.com/skysider/pwndocker/)
+
 ### included software
 
 - [pwntools](https://github.com/Gallopsled/pwntools)  —— CTF framework and exploit development library
