@@ -14,11 +14,12 @@ A docker environment for pwn in ctf based on **phusion/baseimage:jammy-1.0.4**, 
 - [pwndbg](https://github.com/pwndbg/pwndbg)  —— a GDB plug-in that makes debugging with GDB suck less, with a focus on features needed by low-level software developers, hardware hackers, reverse-engineers and exploit developers
 - [pwngdb](https://github.com/scwuaptx/Pwngdb) —— gdb for pwn
 - [ROPgadget](https://github.com/JonathanSalwan/ROPgadget)  —— facilitate ROP exploitation tool
+- [ropper](https://github.com/sashs/Ropper) —— find gadgets to build rop chains for different architectures
 - [one_gadget](https://github.com/david942j/one_gadget) —— A searching one-gadget of execve('/bin/sh', NULL, NULL) tool for amd64 and i386
 - [angr](https://github.com/angr/angr)   ——  A platform-agnostic binary analysis framework
 - [radare2](https://github.com/radare/radare2) ——  A rewrite from scratch of radare in order to provide a set of libraries and tools to work with binary files
 - [seccomp-tools](https://github.com/david942j/seccomp-tools) —— Provide powerful tools for seccomp analysis
-- [tmux](https://tmux.github.io/) 	—— a terminal multiplexer
+- [tmux](https://github.com/tmux/tmux) 	—— a terminal multiplexer
 - [ltrace](https://linux.die.net/man/1/ltrace)      —— trace library function call
 - [strace](https://linux.die.net/man/1/strace)     —— trace system call
 
